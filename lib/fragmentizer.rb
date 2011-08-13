@@ -9,18 +9,21 @@ class Fragmentizer
       weights
     else
       length = str.length
-    
-      interval = 1
-      while interval <= length do
-        i = 0
-        while i <= length - interval do
-          current = str[i, interval ]
-          weights[current] += 1
-          i += 1
-        end
-        interval += 1
+      
+      # loop over all possible intervals
+      (1..length).each do |interval|
+        fragmentize_in_interval str, interval, weights
+        #interval += 1
       end
       weights
+    end
+  end
+  
+  def fragmentize_in_interval str, interval, weights
+    length = str.length
+    (0..length-interval).each do |i|
+      current = str[i, interval ]
+      weights[current] += 1
     end
   end
 end
