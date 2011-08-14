@@ -14,10 +14,11 @@ class Index
   def add searchee, target
     f = Fragmentizer.new
     weights = f.fragmentize searchee
-    @storage.save weights, target
+    @storage.save target, weights
   end
   
   def search query
+    @storage.search query
   end
 end
 
@@ -28,14 +29,24 @@ class InMemoryStorage
     @store = {}
   end
   
-  def save weights, target
+  # target is a simple value - we care not what
+  # weights are all fragments (indices) and their weight 
+  # eg. { "aba" => 1, "ab" => 1, "ba" => 1, "b" => 1, "a" => 2 } for the string "aba"
+  def save target, weights
     weights.keys.each do |key|
-      @store[key] = [[target,weights[key]]]
+      if @store[key].nil?
+        @store[key] = {target => weights[key]}
+      elsif @store[key][target].nil?
+        @store[key][target] = weights[key]
+      else
+        @store[key][target] += weights
+      end
     end
   end
   
+  # return { target1 => weight, target2 => weight }
   def search query
-    @store[query].first.first
+    @store[query]
   end
 end
 
