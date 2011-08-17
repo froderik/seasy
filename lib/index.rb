@@ -3,6 +3,11 @@ class Index
     @storage = InMemoryStorage.new
   end
   
+  # set a new storage implementation instead of 
+  # the naive in memory impl that is default
+  #
+  # the given parameter should answer to the methods 
+  # save( target, weights ) and search( query )
   def storage= new_storage
     @storage = new_storage
   end
