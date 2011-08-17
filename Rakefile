@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "seasy"
   gem.homepage = "http://github.com/froderik/seasy"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{server less search}
+  gem.description = %Q{An easy to use search index (requiring no external servers) with a pluggable design for index storage.}
   gem.email = "fredrik@eldfluga.se"
   gem.authors = ["Fredrik Rubensson"]
   # dependencies defined in Gemfile
