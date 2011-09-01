@@ -12,5 +12,11 @@ describe Index do
     i.add 'red red wine', 2
     i.search( "red").should == {2 => 2 ,1 => 1}
   end
+  
+  it "should be possible to add complex strings twice" do
+    i = Index.new
+    i.add 'fluff', 1
+    i.add 'fluffluff', 1
+  end
 end
 
