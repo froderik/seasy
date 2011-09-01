@@ -4,6 +4,8 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'fragmentizer'
 require 'index'
 
+include Seasy
+
 describe Index do
   it "should default and have some basic behaviour" do
     i = Index.default
@@ -14,9 +16,12 @@ describe Index do
   end
   
   it "should be possible to add complex strings twice" do
-    i = Index.new
+    i = subject
     i.add 'fluff', 1
     i.add 'fluffluff', 1
+    i.search( 'fluff' ).should == {1 => 3}
+    i.search( 'f' ).should == {1 => 8}
   end
+  
 end
 
