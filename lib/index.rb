@@ -1,18 +1,27 @@
+require 'singleton'
+
 module Seasy
+
+  class Configuration 
+    include Singleton
+    
+    attr_accessor :storage
+    
+    def initialize
+      @storage = Seasy::InMemoryStorage.new
+    end
+  end
+  
+  def configure
+    config = Seasy::Configuration.instance
+    yield config
+  end
+  
   class Index
     def initialize
-      @storage = InMemoryStorage.new
+      @storage = Configuration.instance.storage
     end
-  
-    # set a new storage implementation instead of 
-    # the naive in memory impl that is default
-    #
-    # the given parameter should answer to the methods 
-    # save( target, weights ) and search( query )
-    def storage= new_storage
-      @storage = new_storage
-    end
-  
+
     def Index::default
       @@defaultee = Index.new if not defined? @@defaultee
     end
@@ -32,6 +41,10 @@ module Seasy
   
     def search query
       @storage.search query
+    end
+    
+    def clear 
+      @storage.clear
     end
   end
 
@@ -64,6 +77,10 @@ module Seasy
     # return { target1 => weight, target2 => weight }
     def search query
       @store[query]
+    end
+    
+    def clear
+      @store = {}
     end
   end
 

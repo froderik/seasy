@@ -34,6 +34,12 @@ describe Fragmentizer do
     result["cab"].should == 1    
   end
   
+  it "should count conecutive singularities" do
+    f = subject
+    result = f.fragmentize "fluffluff"
+    result["f"].should == 5
+  end
+  
   it "should split a string into parts on whitespace" do
     f = Fragmentizer.new
     result = f.fragmentize( "ab c" )
