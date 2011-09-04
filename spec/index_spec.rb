@@ -31,10 +31,10 @@ describe Index do
   end
   
   it "should have a configurable storage" do    
-    Seasy.configure do |config|
+    configure do |config|
       config.storage = DummyStorage.new
     end
-    dummy = Seasy::Configuration.instance.storage
+    dummy = Configuration.instance.storage
     
     i = Index.default
     i.add 'a', 1
