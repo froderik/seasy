@@ -8,7 +8,7 @@ module Seasy
     attr_accessor :storage
     
     def initialize
-      @storage = Seasy::InMemoryStorage.new
+      @storage = Seasy::InMemoryStorage
     end
   end
   
@@ -18,12 +18,24 @@ module Seasy
   end
   
   class Index
-    def initialize
-      @storage = Configuration.instance.storage
+    attr_accessor :name
+    
+    def initialize name = 'default'
+      @name = name
+      @storage = Configuration.instance.storage.new
     end
 
     def Index::default
       @@defaultee = Index.new if not defined? @@defaultee
+    end
+    
+    def Index::with_name name
+      stringed_name = name.to_s
+      @@indices = {} if not defined? @@indices
+      if @@indices[stringed_name].nil?
+        @@indices[stringed_name] = Index.new stringed_name
+      end
+      @@indices[stringed_name]
     end
   
     def add searchee, target
@@ -76,12 +88,13 @@ module Seasy
   
     # return { target1 => weight, target2 => weight }
     def search query
-      @store[query]
+      @store[query] || {}
     end
     
     def clear
       @store = {}
     end
+    
   end
 
 end

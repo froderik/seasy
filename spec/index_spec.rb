@@ -29,41 +29,60 @@ describe Index do
     i.search( 'lu' ).should == {1 => 3}
     i.search( 'f' ).should == {1 => 8}
   end
+    
+  it "should have named indices" do
+    one_index = Index.with_name 42
+    another_index = Index.with_name 66
+    
+    one_index.name.should == '42'
+    another_index.name.should == '66'
+    
+    one_index.add 'meaning', 'universe'
+    another_index.add 'evilness', 'hell'
+    
+    one_index.search( 'vil' ).should == { }
+    another_index.search( 'vil' ).should == { 'hell' => 1 }
+    
+    one_index.search( 'ean' ).should == {'universe' => 1}
+    another_index.search( 'ean' ).should == {  }    
+  end
   
   it "should have a configurable storage" do    
     configure do |config|
-      config.storage = DummyStorage.new
+      config.storage = DummyStorage
     end
-    dummy = Configuration.instance.storage
     
     i = Index.default
     i.add 'a', 1
     i.search 'a'
-    dummy.should be_saved_once
-    dummy.should be_searched_once
+    DummyStorage.should be_saved_once
+    DummyStorage.should be_searched_once
   end
 end
 
 class DummyStorage 
   def initialize
-    @saved_count = 0
-    @searched_count = 0
+    @@saved_count = 0
+    @@searched_count = 0
   end
   
   def save target, weights
-    @saved_count += 1
+    @@saved_count += 1
   end
   
   def search query
-    @searched_count += 1
+    @@searched_count += 1
   end
   
-  def saved_once?
-    @saved_count == 1
+  def DummyStorage::saved_once?
+    @@saved_count == 1
   end
   
-  def searched_once?
-    @searched_count == 1
+  def DummyStorage::searched_once?
+    @@searched_count == 1
+  end
+  
+  def clear
   end
 end
 
