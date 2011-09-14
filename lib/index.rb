@@ -97,4 +97,5 @@ module Seasy
     
   end
 
+  module_function :configure
 end
