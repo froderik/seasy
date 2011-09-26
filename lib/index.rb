@@ -38,19 +38,10 @@ module Seasy
       @@indices[stringed_name]
     end
   
-    def add searchee, target
-      save target, fragmentize( searchee )
+    def add searchee, target, options = {}
+      save target, fragmentize( searchee ), options
     end
 
-    def fragmentize searchee
-       f = Fragmentizer.new
-       f.fragmentize searchee
-    end
-  
-    def save target, weights
-      @storage.save target, weights
-    end
-  
     def search query
       @storage.search query
     end
@@ -58,6 +49,18 @@ module Seasy
     def clear 
       @storage.clear
     end
+    
+    private
+    
+    def fragmentize searchee
+       f = Fragmentizer.new
+       f.fragmentize searchee
+    end
+  
+    def save target, weights, options
+      @storage.save target, weights, options
+    end
+      
   end
 
   # a store got search queries as keys and an array of 
@@ -70,9 +73,11 @@ module Seasy
     # target is a simple value - we care not what
     # weights are all fragments (indices) and their weight 
     # eg. { "aba" => 1, "ab" => 1, "ba" => 1, "b" => 1, "a" => 2 } for the string "aba"
-    def save target, weights
+    def save target, weights, options = {}
+      real_target = target
+      real_target = options[:source] unless options[:source].nil?
       weights.keys.each do |key|
-        add weights[key], key, target
+        add weights[key], key, real_target
       end
     end
   
