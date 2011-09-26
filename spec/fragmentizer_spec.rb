@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-require 'fragmentizer'
+require 'seasy'
 
 describe Fragmentizer do
   it "should split a string in its parts" do

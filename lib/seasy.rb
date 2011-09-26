@@ -1,2 +1,2 @@
-require 'fragmentizer'
-require 'index'
+require 'seasy/fragmentizer'
+require 'seasy/index'
