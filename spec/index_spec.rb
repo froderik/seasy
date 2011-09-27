@@ -56,7 +56,23 @@ describe Index do
     i = subject
     i.add 'landsnora', 'edsberg'
     i.add 'landsnora', 'edsberg', :source => 'sollentuna'
-    i.search( 'landsnora' ).should == {'edsberg' => 1, 'sollentuna' => 1}
+    i.search( 'landsnora' ).should == {'edsberg' => 2}
+  end
+  
+  it "should remove targets" do
+    i = subject
+    i.add 'searchentry', 'gooo', :source => 'gooo'
+    i.search( 'entry' ).should == {'gooo' => 1}
+    i.remove 'gooo'
+    i.search( 'entry' ).should == {}
+  end
+
+  it "should remove sources" do
+    i = subject
+    i.add 'searchentry', 'target', :source => 'hoola'
+    i.search( 'entry' ).should == {'target' => 1}
+    i.remove 'hoola'
+    i.search( 'entry' ).should == {}
   end
 
   it "should have a configurable storage" do    

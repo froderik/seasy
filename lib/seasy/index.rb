@@ -39,6 +39,7 @@ module Seasy
     end
   
     def add searchee, target, options = {}
+      options[:source] = target if options[:source].nil? 
       save target, fragmentize( searchee ), options
     end
 
@@ -48,6 +49,10 @@ module Seasy
     
     def clear 
       @storage.clear
+    end
+    
+    def remove target
+      @storage.remove target
     end
     
     private
@@ -68,16 +73,19 @@ module Seasy
   class InMemoryStorage
     def initialize 
       @store = {}
+      @sources = {}
     end
   
     # target is a simple value - we care not what
     # weights are all fragments (indices) and their weight 
     # eg. { "aba" => 1, "ab" => 1, "ba" => 1, "b" => 1, "a" => 2 } for the string "aba"
     def save target, weights, options = {}
-      real_target = target
-      real_target = options[:source] unless options[:source].nil?
+      raise ":source need to be set" if options[:source].nil?
+      source = options[:source]
+      @sources[source] ||= [] 
+      @sources[source] << target
       weights.keys.each do |key|
-        add weights[key], key, real_target
+        add weights[key], key, target
       end
     end
   
@@ -98,6 +106,15 @@ module Seasy
     
     def clear
       @store = {}
+      @sources = {}
+    end
+    
+    def remove source
+      targets = @sources[source]
+      puts "deleting #{source}"
+      @store.delete_if {|key,value| !value[targets.first].nil?}
+      puts "#{@store}"
+      puts "#{@sources}"
     end
     
   end
