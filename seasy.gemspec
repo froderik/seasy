@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{seasy}
-  s.version = "0.0.4"
+  s.name = "seasy"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fredrik Rubensson"]
-  s.date = %q{2011-09-14}
-  s.description = %q{An easy to use search index (requiring no external servers) with a pluggable design for index storage.}
-  s.email = %q{fredrik@eldfluga.se}
+  s.date = "2011-09-28"
+  s.description = "An easy to use search index (requiring no external servers) with a pluggable design for index storage."
+  s.email = "fredrik@eldfluga.se"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -25,17 +25,18 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
-    "lib/fragmentizer.rb",
-    "lib/index.rb",
     "lib/seasy.rb",
+    "lib/seasy/fragmentizer.rb",
+    "lib/seasy/index.rb",
+    "seasy.gemspec",
     "spec/fragmentizer_spec.rb",
     "spec/index_spec.rb"
   ]
-  s.homepage = %q{http://github.com/froderik/seasy}
+  s.homepage = "http://github.com/froderik/seasy"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.0}
-  s.summary = %q{server less search}
+  s.rubygems_version = "1.8.10"
+  s.summary = "server less search"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
