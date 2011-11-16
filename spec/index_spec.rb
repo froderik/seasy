@@ -87,12 +87,23 @@ describe Index do
     DummyStorage.should be_searched_once
   end
   
+  it "should set name in init if name= is present" do
+    configure do |config|
+      config.storage = DummyStorage
+    end
+    
+    i = Index.with_name 'a_name'
+    DummyStorage.should be_name_setter_called
+  end
+  
 end
 
 class DummyStorage 
+  
   def initialize
     @@saved_count = 0
     @@searched_count = 0
+    @@name_setter_called = false
   end
   
   def save target, weights, options = {}
@@ -109,6 +120,14 @@ class DummyStorage
   
   def DummyStorage::searched_once?
     @@searched_count == 1
+  end
+  
+  def DummyStorage::name_setter_called?
+    @@name_setter_called
+  end
+  
+  def name= name
+    @@name_setter_called = true
   end
   
   def clear

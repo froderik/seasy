@@ -23,6 +23,7 @@ module Seasy
     def initialize name = 'default'
       @name = name
       @storage = Configuration.instance.storage.new
+      @storage.name = name if @storage.respond_to? :name=
     end
 
     def Index::default
