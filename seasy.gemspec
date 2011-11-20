@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "seasy"
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fredrik Rubensson"]
-  s.date = "2011-09-28"
+  s.date = "2011-11-20"
   s.description = "An easy to use search index (requiring no external servers) with a pluggable design for index storage."
   s.email = "fredrik@eldfluga.se"
   s.extra_rdoc_files = [
