@@ -26,6 +26,7 @@ Seasy got a built-in memory storage that is used default. If you need to do some
     end
 
 A storage needs to answer to the following methods.
+
 * an empty constructor
 * a save method with three arguments: a target, a string that will be indexed and a options hash
 * a search method that accepts a query string
