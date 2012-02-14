@@ -112,10 +112,7 @@ module Seasy
     
     def remove source
       targets = @sources[source]
-      puts "deleting #{source}"
       @store.delete_if {|key,value| !value[targets.first].nil?}
-      puts "#{@store}"
-      puts "#{@sources}"
     end
     
   end
