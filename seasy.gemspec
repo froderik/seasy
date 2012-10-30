@@ -5,16 +5,16 @@
 
 Gem::Specification.new do |s|
   s.name = "seasy"
-  s.version = "0.0.7"
+  s.version = "0.0.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fredrik Rubensson"]
-  s.date = "2011-11-20"
+  s.date = "2012-10-30"
   s.description = "An easy to use search index (requiring no external servers) with a pluggable design for index storage."
   s.email = "fredrik@eldfluga.se"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
     "lib/seasy.rb",
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/froderik/seasy"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.24"
   s.summary = "server less search"
 
   if s.respond_to? :specification_version then
