@@ -26,20 +26,33 @@ describe Fragmentizer do
     result["ab"].should == 2
     result["bc"].should == 1
     result["ca"].should == 1
-    result["abc"].should == 1    
-    result["abca"].should == 1    
-    result["abcab"].should == 1    
-    result["bca"].should == 1    
-    result["bcab"].should == 1    
-    result["cab"].should == 1    
+    result["abc"].should == 1
+    result["abca"].should == 1
+    result["abcab"].should == 1
+    result["bca"].should == 1
+    result["bcab"].should == 1
+    result["cab"].should == 1
   end
-  
+
+  it "should downcase" do
+    f = Fragmentizer.new
+    result = f.fragmentize( "Abab" )
+    result.size.should == 7
+    result['a'].should == 2
+    result['b'].should == 2
+    result['ab'].should == 2
+    result['ba'].should == 1
+    result['bab'].should == 1
+    result['aba'].should == 1
+    result['abab'].should == 1
+  end
+
   it "should count conecutive singularities" do
     f = subject
     result = f.fragmentize "fluffluff"
     result["f"].should == 5
   end
-  
+
   it "should split a string into parts on whitespace" do
     f = Fragmentizer.new
     result = f.fragmentize( "ab c" )
